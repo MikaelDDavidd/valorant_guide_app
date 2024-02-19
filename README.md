@@ -28,7 +28,7 @@ Valorant Guide app is a small demo application to demonstrate Flutter applicatio
 ### Libraries & Tools Used
 
 * [Http](https://github.com/flutterchina/dio)
-* [getX]([https://github.com/mobxjs/mobx.dart](https://github.com/jonataslaw/getx)
+* [getX](https://github.com/jonataslaw/getx)
 * [Provider](https://github.com/rrousselGit/provider) (State Management)
 * [Json Serialization](https://github.com/dart-lang/json_serializable)
 * [cached_network_image](https://pub.dev/packages/cached_network_image)
