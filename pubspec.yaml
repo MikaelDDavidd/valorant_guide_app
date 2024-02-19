@@ -1,0 +1,56 @@
+name: valorant_guide_app
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=3.2.6 <4.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  get: 4.6.6
+  flutter: 
+    sdk: flutter
+  get_storage: ^2.1.1
+  flutter_svg: ^2.0.9
+  retrofit: '>=4.0.0 <5.0.0'
+  json_annotation: ^4.8.1
+  retrofit_generator: '>=7.0.0 <8.0.0'
+  build_runner: '>=2.3.0 <4.0.0'
+  dio: ^5.4.0
+  logger: ^2.0.2+1
+  repository: ^3.0.0
+  http: ^0.13.6
+  reflectable: ^4.0.5
+  cached_network_image: ^3.3.1
+  sidebarx: ^0.16.3
+  another_flushbar: ^1.12.30
+
+dev_dependencies: 
+  flutter_lints: ^2.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+  - assets/icons/
+  - assets/images/
+
+  fonts:
+  - family: ProductSans
+    fonts:
+    - asset: assets/fonts/Product-Sans-Regular.ttf
+    - asset: assets/fonts/Product-Sans-Italic.ttf
+      style: italic
+    - asset: assets/fonts/Product-Sans-Bold.ttf
+      weight: 700
+  - family: Rubik
+    fonts:
+    - asset: assets/fonts/Rubik-Regular.ttf
+    - asset: assets/fonts/Rubik-Italic.ttf
+      style: italic
+    - asset: assets/fonts/Rubik-Bold.ttf
+      weight: 700
+    - asset: assets/fonts/Rubik-Medium.ttf

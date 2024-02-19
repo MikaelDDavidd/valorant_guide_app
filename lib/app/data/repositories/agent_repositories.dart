@@ -1,0 +1,37 @@
+import 'dart:convert';
+
+import 'package:valorant_guide_app/app/constants/app_assets.dart';
+import 'package:valorant_guide_app/app/data/http/exceptions.dart';
+import 'package:valorant_guide_app/app/data/http/http_client.dart';
+import 'package:valorant_guide_app/app/models/agent.dart';
+
+abstract class iAgentRepository {
+  Future<List<AgentData>> getAgents();
+}
+
+class AgentRepository implements iAgentRepository {
+  final IHttpClient client;
+
+  AgentRepository({required this.client});
+
+  @override
+  Future<List<AgentData>> getAgents() async {
+    final response = await client.get(url: AppAssets.agentsEndPoint);
+
+    if (response.statusCode == 200) {
+      final List<AgentData> agents = [];
+      final body = jsonDecode(response.body);
+
+      body['data'].map((item) {
+        final AgentData agent = AgentData.fromJson(item);
+        agents.add(agent);
+      }).toList();
+
+      return agents;
+    } else if (response.statusCode == 404) {
+      throw NotFoundException('A url informada não é válida');
+    } else {
+      throw Exception('não foi possivel carregar os produtos');
+    }
+  }
+}
