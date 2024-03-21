@@ -9,9 +9,9 @@ import 'package:valorant_guide_app/app/modules/home/controllers/maps_controller.
 import 'package:valorant_guide_app/app/routes/app_pages.dart';
 
 class MapsView extends GetView {
-   MapsView({Key? key}) : super(key: key);
+  MapsView({Key? key}) : super(key: key);
   final mapController = Get.find<MapsController>();
- 
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -63,12 +63,13 @@ class MapsView extends GetView {
   Widget _gridCards() {
     final controller = Get.find<HomeController>();
     final store = mapController.store;
+    final filteredItems = store.state.value.where((item) => item.uuid != "ee613ee9-28b7-4beb-9666-08db13bb2244").toList();
     return GridView.builder(
       // Create a grid with 2 columns. If you change the scrollDirection to
       // horizontal, this produces 2 rows.
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      itemCount: store.state.value.length,
+      itemCount: filteredItems.length,
       // Generate 100 widgets that display their index in the List.
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         mainAxisSpacing: 10,
@@ -76,10 +77,11 @@ class MapsView extends GetView {
         crossAxisCount: 2,
       ),
       itemBuilder: (BuildContext context, int index) {
-        final item = store.state.value[index];
+        final item = filteredItems[index];
+
         return InkWell(
           onTap: () {
-            Navigator.pushNamed(context, Routes.MAPDETAILS, arguments:item);
+            Navigator.pushNamed(context, Routes.MAPDETAILS, arguments: item);
           },
           child: Stack(
             children: [
@@ -108,7 +110,7 @@ class MapsView extends GetView {
               Align(
                 alignment: Alignment.centerLeft,
                 child: CachedNetworkImage(
-                  imageUrl: item.displayIcon ?? '',
+                  imageUrl: item.displayIcon!,
                   width: 130,
                   height: 130,
                   progressIndicatorBuilder: (context, url, downloadProgress) => CircularProgressIndicator(

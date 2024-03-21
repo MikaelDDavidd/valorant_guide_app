@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:valorant_guide_app/app/constants/app_colors.dart';
+import 'package:valorant_guide_app/app/constants/app_strings.dart';
 import 'package:valorant_guide_app/app/models/maps.dart';
 import 'package:valorant_guide_app/app/modules/home/controllers/maps_controller.dart';
 import '../controllers/details_controller.dart';
+import 'package:fullscreen_image_viewer/fullscreen_image_viewer.dart';
 
 class MapDetailsView extends GetView<DetailsController> {
   MapDetailsView({Key? key}) : super(key: key);
@@ -37,7 +39,7 @@ class MapDetailsView extends GetView<DetailsController> {
       child: Column(
         children: [
           _topImage(map),
-          _biography(map),
+          _biography(Get.context!, map),
           _specialAbilities(map),
         ],
       ),
@@ -129,7 +131,8 @@ class MapDetailsView extends GetView<DetailsController> {
     );
   }
 
-  Widget _biography(MapData map) {
+  Widget _biography(BuildContext context, MapData map) {
+    final descriptionName = map.displayName.toLowerCase();
     return Padding(
       padding: const EdgeInsets.all(24.0),
       child: Column(
@@ -137,12 +140,26 @@ class MapDetailsView extends GetView<DetailsController> {
         children: [
           Align(
             alignment: Alignment.center,
-            child: Image.network(
-              map.displayIcon!,
-              height: 250,
-              width: 250,
-              color: Color.fromARGB(255, 255, 255, 255),
-              colorBlendMode: BlendMode.modulate,
+            child: GestureDetector(
+              child: Image.network(
+                map.displayIcon!,
+                height: 250,
+                width: 250,
+                color: Color.fromARGB(255, 255, 255, 255),
+                colorBlendMode: BlendMode.modulate,
+              ),
+              onTap: () {
+                FullscreenImageViewer.open(
+                  context: context,
+                  child: GestureDetector(
+                    child: Hero(
+                      tag: 'hero',
+                      child: Image.network(map.displayIcon!),
+                    ),
+                    onTap: () => Get.back(),
+                  ),
+                );
+              },
             ),
           ),
           Text(
@@ -157,7 +174,7 @@ class MapDetailsView extends GetView<DetailsController> {
           Padding(
             padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
             child: Text(
-              map.narrativeDescription,
+              AppStrings.ascent,
               style: const TextStyle(
                 color: AppColors.grey,
                 fontSize: 12,
