@@ -9,7 +9,7 @@
   Design
 </p>
 
-![Design](https://github.com/MikaelDDavidd/valorant_guide_app/blob/main/hub/design.jpeg)
+![Design](https://github.com/MikaelDDavidd/valorant_guide_app/blob/main/hub/design.jpg)
 <p align="center">
   Design by: <a href="https://dribbble.com/shots/14073476-Valorant-Agents">Malik Abimanyu</a>
 </p>
