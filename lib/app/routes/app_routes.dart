@@ -7,6 +7,7 @@ abstract class Routes {
   static const MAPS = _Paths.MAPS;
   static const DETAILS = _Paths.DETAILS;
   static const MAPDETAILS = _Paths.MAPDETAILS;
+  static const WEAPONDETAILS = _Paths.WEAPONDETAILS;
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const MAPS = '/maps';
   static const DETAILS = '/details';
   static const MAPDETAILS = '/mapdetails';
+  static const WEAPONDETAILS = '/weapondetails';
 }

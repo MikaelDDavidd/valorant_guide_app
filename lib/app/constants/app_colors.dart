@@ -22,6 +22,9 @@ class AppColors {
   static const Color darkPurple = Color(0xFF1E2050);
   static const Color grey = Color(0xFF9192A7);
   static const Color detailListBackground = Color(0xFF14212E);
+  static const Color red = Color.fromARGB(255, 255, 0, 0);
+  static const Color green = Color.fromARGB(255, 0, 255, 76);
+  static const Color blue = Color.fromARGB(255, 0, 53, 105);
 }
 
 class AppTheme {

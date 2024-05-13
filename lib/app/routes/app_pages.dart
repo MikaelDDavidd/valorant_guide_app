@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:get/get.dart';
 import 'package:valorant_guide_app/app/modules/details/views/map_details_view.dart';
+import 'package:valorant_guide_app/app/modules/details/views/weapon_details_view.dart';
 
 import '../modules/details/bindings/details_binding.dart';
 import '../modules/details/views/details_view.dart';
@@ -35,6 +36,11 @@ class AppPages {
     GetPage(
       name: _Paths.MAPDETAILS,
       page: () =>  MapDetailsView(),
+      binding: DetailsBinding(),
+    ),
+    GetPage(
+      name: _Paths.WEAPONDETAILS,
+      page: () =>  WeaponDetailsView(),
       binding: DetailsBinding(),
     ),
   ];

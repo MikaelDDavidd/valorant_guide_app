@@ -5,7 +5,7 @@ class WeaponData {
   late final String displayName;
   late final String category;
   late final String displayIcon;
- // late final List<WeaponStats> weaponStats;
+  late final WeaponStats? weaponStats;
  // late final List<ShopData> shopData;
  // late final List<Skins> skins;
 
@@ -14,7 +14,7 @@ class WeaponData {
     required this.displayName,
     required this.category,
     required this.displayIcon,
-  //  required this.weaponStats,
+    required this.weaponStats,
   //  required this.shopData,
   //  required this.skins,
   });
@@ -25,7 +25,7 @@ class WeaponData {
       displayName: map['displayName'],
       category: map['category'],
       displayIcon: map['displayIcon'],
-  //    weaponStats: map['weaponStats'],
+      weaponStats: (map['weaponsStats'] != null ? WeaponStats.fromMap(map['weaponStats']) : null),
   //    shopData: map['shopData'],
   //    skins: map['skins'],
     );
@@ -44,7 +44,7 @@ class WeaponStats {
   factory WeaponStats.fromMap(Map<String, dynamic> map) {
     return WeaponStats(
       fireRate: map['fireRate'],
-      damageRanges: map['damageRanges'],
+      damageRanges: List.from(map['damageRanges']).map((e) => DamageRanges.fromMap(e)).toList(),
     );
   }
 }

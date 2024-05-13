@@ -6,6 +6,7 @@ import 'package:valorant_guide_app/app/constants/app_colors.dart';
 import 'package:valorant_guide_app/app/modules/home/controllers/home_controller.dart';
 import 'package:valorant_guide_app/app/modules/home/controllers/maps_controller.dart';
 import 'package:valorant_guide_app/app/modules/home/controllers/weapon_controller.dart';
+import 'package:valorant_guide_app/app/routes/app_pages.dart';
 
 class WeaponsView extends GetView {
   WeaponsView({Key? key}) : super(key: key);
@@ -77,7 +78,7 @@ class WeaponsView extends GetView {
         final item = store.state.value[index];
         return InkWell(
           onTap: () {
-            //        Navigator.pushNamed(context, Routes.detail, arguments: _postStore.agentList!.data[index]);
+                   Navigator.pushNamed(context, Routes.WEAPONDETAILS, arguments: item);
           },
           child: Stack(
             children: [
