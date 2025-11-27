@@ -1,0 +1,147 @@
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+alias jdk17="sdk default java 17.0.12-amzn"
+alias jdk11="sdk default java 11.0.24-amzn"
+alias jdk8="sdk default java 8.0.422-amzn"
+alias install-requirements='pip install -r requirements.txt'
+alias run='python app.py'
+alias python='/usr/bin/python3'
+
+export ANDROID_HOME=/Users/mikaeldavid/Library/Android/sdk
+export ANDROID_SDK_ROOT=/Users/mikaeldavid/Library/Android/sdk
+export FLUTTER_HOME=/Users/mikaeldavid/Documents/devprograms/flutter
+
+export PATH="$PATH":"$HOME/.pub-cache/bin"
+export PATH=$PATH:$FLUTTER_HOME/bin
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH="/opt/homebrew/bin:$PATH"
+
+function openxcode() {
+  open ios/Runner.xcworkspace
+}
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/mikaeldavid/.dart-cli-completion/zsh-config.zsh ]] && . /Users/mikaeldavid/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+
+
+[valorant_guide_app] flutter pub upgrade
+Resolving dependencies...
+Downloading packages...
+> _fe_analyzer_shared 76.0.0 (was 61.0.0) (78.0.0 available)
++ _macros 0.3.3 from sdk dart
+> analyzer 6.11.0 (was 5.13.0) (7.1.0 available)
+> args 2.6.0 (was 2.4.2)
+  async 2.11.0 (2.12.0 available)
+  boolean_selector 2.1.1 (2.1.2 available)
+> build 2.4.2 (was 2.4.1)
+> build_config 1.1.2 (was 1.1.1)
+> build_daemon 4.0.3 (was 4.0.1)
+> build_resolvers 2.4.3 (was 2.4.2)
+> build_runner 2.4.13 (was 2.4.8) (2.4.14 available)
+> build_runner_core 7.3.2 (was 7.3.0) (8.0.0 available)
+> built_value 8.9.3 (was 8.9.0)
+  cached_network_image 3.3.1 (3.4.1 available)
+  cached_network_image_platform_interface 4.0.0 (4.1.1 available)
+> cached_network_image_web 1.2.0 (was 1.1.1) (1.3.1 available)
+  characters 1.3.0 (1.4.0 available)
+  clock 1.1.1 (1.1.2 available)
+> code_builder 4.10.1 (was 4.10.0)
+> collection 1.19.0 (was 1.18.0) (1.19.1 available)
+> convert 3.1.2 (was 3.1.1)
+> crypto 3.0.6 (was 3.0.3)
+> cupertino_icons 1.0.8 (was 1.0.6)
+> dart_style 2.3.7 (was 2.3.2) (3.0.1 available)
+> dio 5.7.0 (was 5.4.0)
++ dio_web_adapter 2.0.0
+> equatable 2.0.7 (was 2.0.5)
+  fake_async 1.3.1 (1.3.2 available)
+> ffi 2.1.3 (was 2.1.0)
+> file 7.0.1 (was 7.0.0)
+> fixnum 1.1.1 (was 1.1.0)
+  flutter_cache_manager 3.3.1 (3.4.1 available)
+  flutter_lints 2.0.3 (5.0.0 available)
+  flutter_svg 2.0.9 (2.0.17 available)
+> frontend_server_client 4.0.0 (was 3.2.0)
+> graphs 2.3.2 (was 2.3.1)
+  http 0.13.6 (1.2.2 available)
+> http_multi_server 3.2.2 (was 3.2.1)
+> http_parser 4.1.2 (was 4.0.2)
+  intl 0.19.0 (0.20.1 available)
+> io 1.0.5 (was 1.0.4)
+> js 0.7.1 (was 0.7.0)
+> json_annotation 4.9.0 (was 4.8.1)
+> leak_tracker 10.0.7 (was 10.0.5) (10.0.8 available)
+> leak_tracker_flutter_testing 3.0.8 (was 3.0.5) (3.0.9 available)
+  lints 2.1.1 (5.1.1 available)
+> logger 2.5.0 (was 2.0.2+1)
+> logging 1.3.0 (was 1.2.0)
++ macros 0.1.3-main.0
+  matcher 0.12.16+1 (0.12.17 available)
+  material_color_utilities 0.11.1 (0.12.0 available)
+  meta 1.15.0 (1.16.0 available)
+> mime 2.0.0 (was 1.0.5)
+> octo_image 2.1.0 (was 2.0.0)
+> package_config 2.1.1 (was 2.1.0)
+  path 1.9.0 (1.9.1 available)
+> path_parsing 1.1.0 (was 1.0.1)
+> path_provider 2.1.5 (was 2.1.2)
+> path_provider_android 2.2.15 (was 2.2.2)
+> path_provider_foundation 2.4.1 (was 2.3.2)
+> path_provider_windows 2.3.0 (was 2.2.1)
+  petitparser 6.0.2 (6.1.0 available)
+> platform 3.1.6 (was 3.1.4)
+> pub_semver 2.1.5 (was 2.1.4)
+> pubspec_parse 1.5.0 (was 1.2.3)
+> reflectable 4.0.12 (was 4.0.5)
+> retrofit 4.4.2 (was 4.1.0)
+  retrofit_generator 7.0.8 (9.1.7 available)
+  rxdart 0.27.7 (0.28.0 available)
+> shelf 1.4.2 (was 1.4.1)
+> shelf_web_socket 2.0.1 (was 1.0.4)
+  sidebarx 0.16.3 (0.17.1 available)
+< sky_engine 0.0.0 from sdk flutter (was 0.0.99 from sdk flutter)
+  source_gen 1.5.0 (2.0.0 available)
+  source_span 1.10.0 (1.10.1 available)
+> sqflite 2.4.1 (was 2.3.2)
++ sqflite_android 2.4.0
+> sqflite_common 2.5.4+6 (was 2.5.3)
++ sqflite_darwin 2.4.1+1
++ sqflite_platform_interface 2.4.0
+> stack_trace 1.12.0 (was 1.11.1) (1.12.1 available)
+  stream_channel 2.1.2 (2.1.4 available)
+> stream_transform 2.1.1 (was 2.1.0)
+> string_scanner 1.3.0 (was 1.2.0) (1.4.1 available)
+> synchronized 3.3.0+3 (was 3.1.0+1)
+  term_glyph 1.2.1 (1.2.2 available)
+> test_api 0.7.3 (was 0.7.2) (0.7.4 available)
+> timing 1.0.2 (was 1.0.1)
+> typed_data 1.4.0 (was 1.3.2)
+> uuid 4.5.1 (was 4.3.3)
+  vector_graphics 1.1.10+1 (1.1.15 available)
+  vector_graphics_codec 1.1.10+1 (1.1.13 available)
+  vector_graphics_compiler 1.1.10+1 (1.1.16 available)
+> vm_service 14.3.0 (was 14.2.5) (15.0.0 available)
+> watcher 1.1.1 (was 1.1.0)
++ web 1.1.0
++ web_socket 0.1.6
+> web_socket_channel 3.0.1 (was 2.4.0)
+> xdg_directories 1.1.0 (was 1.0.4)
+> yaml 3.1.3 (was 3.1.2)
+These packages are no longer being depended on:
+- win32 5.2.0
+Changed 73 dependencies!
+41 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+exit code 0

@@ -5,9 +5,11 @@ description: A new Flutter project.
 environment: 
   sdk: '>=3.2.6 <4.0.0'
 
-dependencies: 
+dependencies:
   cupertino_icons: ^1.0.2
   get: 4.6.6
+  dartz: ^0.10.1
+  equatable: ^2.0.5
   flutter: 
     sdk: flutter
   get_storage: ^2.1.1
@@ -22,6 +24,7 @@ dependencies:
   http: ^0.13.6
   reflectable: ^4.0.5
   cached_network_image: ^3.3.1
+  shimmer: ^3.0.0
   sidebarx: ^0.16.3
   another_flushbar: ^1.12.30
   fullscreen_image_viewer: ^0.0.6
