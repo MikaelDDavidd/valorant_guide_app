@@ -6,6 +6,7 @@ class AgentModel {
   final String description;
   final String? bustPortrait;
   final String? fullPortrait;
+  final String? fullPortraitV2;
   final String? background;
   final List<String> backgroundGradientColors;
   final bool isPlayableCharacter;
@@ -18,6 +19,7 @@ class AgentModel {
     required this.description,
     this.bustPortrait,
     this.fullPortrait,
+    this.fullPortraitV2,
     this.background,
     this.backgroundGradientColors = const [],
     required this.isPlayableCharacter,
@@ -32,6 +34,7 @@ class AgentModel {
       description: json['description'] ?? '',
       bustPortrait: json['bustPortrait'],
       fullPortrait: json['fullPortrait'],
+      fullPortraitV2: json['fullPortraitV2'],
       background: json['background'],
       backgroundGradientColors: (json['backgroundGradientColors'] as List?)
               ?.map((e) => e.toString())
@@ -53,6 +56,7 @@ class AgentModel {
       description: description,
       bustPortrait: bustPortrait,
       fullPortrait: fullPortrait,
+      fullPortraitV2: fullPortraitV2,
       background: background,
       backgroundGradientColors: backgroundGradientColors,
       isPlayableCharacter: isPlayableCharacter,

@@ -57,6 +57,9 @@ class _AgentDetailsViewState extends State<AgentDetailsView> {
     if (agent.fullPortrait != null) {
       images.add({'url': agent.fullPortrait!, 'label': 'Retrato'});
     }
+    if (agent.fullPortraitV2 != null) {
+      images.add({'url': agent.fullPortraitV2!, 'label': 'Retrato V2'});
+    }
     if (agent.bustPortrait != null) {
       images.add({'url': agent.bustPortrait!, 'label': 'Busto'});
     }

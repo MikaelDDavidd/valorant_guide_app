@@ -6,6 +6,7 @@ class AgentEntity extends Equatable {
   final String description;
   final String? bustPortrait;
   final String? fullPortrait;
+  final String? fullPortraitV2;
   final String? background;
   final List<String> backgroundGradientColors;
   final bool isPlayableCharacter;
@@ -18,6 +19,7 @@ class AgentEntity extends Equatable {
     required this.description,
     this.bustPortrait,
     this.fullPortrait,
+    this.fullPortraitV2,
     this.background,
     this.backgroundGradientColors = const [],
     required this.isPlayableCharacter,
@@ -32,6 +34,7 @@ class AgentEntity extends Equatable {
         description,
         bustPortrait,
         fullPortrait,
+        fullPortraitV2,
         background,
         backgroundGradientColors,
         isPlayableCharacter,
