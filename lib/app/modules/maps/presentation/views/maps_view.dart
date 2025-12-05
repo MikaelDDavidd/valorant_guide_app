@@ -57,98 +57,241 @@ class MapsView extends GetView<MapsController> {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         mainAxisSpacing: 16,
         crossAxisSpacing: 12,
-        childAspectRatio: 0.8,
+        childAspectRatio: 0.75,
         crossAxisCount: 2,
       ),
       itemBuilder: (context, index) {
         final map = controller.filteredMaps[index];
-        return _buildMapCard(context, map);
+        return _buildMapCard(context, map, index);
       },
     );
   }
 
-  Widget _buildMapCard(BuildContext context, MapEntity map) {
-    return InkWell(
+  BorderRadius _getCardShape(int index) {
+    final shapes = [
+      const BorderRadius.only(
+        topLeft: Radius.circular(20),
+        topRight: Radius.circular(20),
+        bottomLeft: Radius.circular(20),
+        bottomRight: Radius.circular(4),
+      ),
+      const BorderRadius.only(
+        topLeft: Radius.circular(20),
+        topRight: Radius.circular(20),
+        bottomLeft: Radius.circular(4),
+        bottomRight: Radius.circular(20),
+      ),
+      const BorderRadius.only(
+        topLeft: Radius.circular(20),
+        topRight: Radius.circular(4),
+        bottomLeft: Radius.circular(20),
+        bottomRight: Radius.circular(20),
+      ),
+      const BorderRadius.only(
+        topLeft: Radius.circular(4),
+        topRight: Radius.circular(20),
+        bottomLeft: Radius.circular(20),
+        bottomRight: Radius.circular(20),
+      ),
+    ];
+    return shapes[index % shapes.length];
+  }
+
+  Matrix4 _getCardTransform(int index) {
+    final transforms = [
+      Matrix4.identity()
+        ..setEntry(3, 2, 0.01)
+        ..rotateY(-0.02)
+        ..rotateX(-0.03),
+      Matrix4.identity()
+        ..setEntry(3, 2, 0.01)
+        ..rotateY(0.02)
+        ..rotateX(-0.03),
+      Matrix4.identity()
+        ..setEntry(3, 2, 0.01)
+        ..rotateY(-0.02)
+        ..rotateX(0.02),
+      Matrix4.identity()
+        ..setEntry(3, 2, 0.01)
+        ..rotateY(0.02)
+        ..rotateX(0.02),
+    ];
+    return transforms[index % transforms.length];
+  }
+
+  Alignment _getTransformAlignment(int index) {
+    final alignments = [
+      FractionalOffset.bottomLeft,
+      FractionalOffset.bottomRight,
+      FractionalOffset.topLeft,
+      FractionalOffset.topRight,
+    ];
+    return alignments[index % alignments.length];
+  }
+
+  String _formatCoordinates(String? coordinates) {
+    if (coordinates == null || coordinates.isEmpty) return '';
+    final parts = coordinates.split(',');
+    if (parts.isEmpty) return '';
+    return parts.first.trim();
+  }
+
+  Widget _buildMapCard(BuildContext context, MapEntity map, int index) {
+    final shape = _getCardShape(index);
+    final backgroundImage = map.splash;
+
+    return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, Routes.MAP_DETAILS, arguments: map);
       },
-      child: Stack(
-        children: [
-          Transform(
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.01)
-              ..rotateY(-0.06)
-              ..rotateX(-0.1),
-            alignment: FractionalOffset.bottomLeft,
-            child: Container(
-              height: double.infinity,
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topRight,
-                  end: Alignment.bottomLeft,
-                  colors: [
-                    AppColors.gradientStartColor,
-                    AppColors.gradientEndColor,
-                  ],
-                ),
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
-                  bottomLeft: Radius.circular(20),
-                ),
+      child: Transform(
+        transform: _getCardTransform(index),
+        alignment: _getTransformAlignment(index),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: shape,
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.gradientStartColor.withAlpha(60),
+                blurRadius: 12,
+                offset: const Offset(0, 6),
               ),
-            ),
+            ],
           ),
-          Align(
-            alignment: Alignment.center,
-            child: CachedNetworkImage(
-              imageUrl: map.displayIcon ?? '',
-              width: 135,
-              height: 135,
-              fit: BoxFit.contain,
-              progressIndicatorBuilder: (context, url, progress) => Shimmer.fromColors(
-                baseColor: AppColors.grey.withAlpha(30),
-                highlightColor: AppColors.grey.withAlpha(60),
-                child: Container(
-                  width: 135,
-                  height: 135,
-                  decoration: BoxDecoration(
-                    color: AppColors.grey,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-              ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            ),
-          ),
-          Positioned(
-            left: 10,
-            bottom: 20,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+          child: ClipRRect(
+            borderRadius: shape,
+            child: Stack(
+              fit: StackFit.expand,
               children: [
-                Text(
-                  map.displayName,
-                  style: TextStyle(
-                    color: AppColors.appColorsTheme[controller.homeThemeIndex.value].text,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
-                    letterSpacing: 2.0,
+                CachedNetworkImage(
+                  imageUrl: backgroundImage,
+                  fit: BoxFit.cover,
+                  progressIndicatorBuilder: (context, url, progress) =>
+                      Shimmer.fromColors(
+                    baseColor: AppColors.grey.withAlpha(30),
+                    highlightColor: AppColors.grey.withAlpha(60),
+                    child: Container(
+                      color: AppColors.gradientStartColor,
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    color: AppColors.gradientStartColor,
+                    child: const Icon(
+                      Icons.map,
+                      color: AppColors.white,
+                      size: 48,
+                    ),
                   ),
                 ),
-                Text(
-                  map.tacticalDescription,
-                  style: TextStyle(
-                    color: AppColors.appColorsTheme[controller.homeThemeIndex.value].text,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 10,
+                Container(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.transparent,
+                        Colors.black.withAlpha(50),
+                        Colors.black.withAlpha(200),
+                      ],
+                      stops: const [0.3, 0.6, 1.0],
+                    ),
+                  ),
+                ),
+                if (map.displayIcon != null)
+                  Positioned(
+                    top: 12,
+                    right: 12,
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: Colors.black.withAlpha(100),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: AppColors.white.withAlpha(30),
+                          width: 1,
+                        ),
+                      ),
+                      child: CachedNetworkImage(
+                        imageUrl: map.displayIcon!,
+                        fit: BoxFit.contain,
+                        errorWidget: (context, url, error) => const SizedBox(),
+                      ),
+                    ),
+                  ),
+                Positioned(
+                  left: 12,
+                  right: 12,
+                  bottom: 12,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        map.displayName.toUpperCase(),
+                        style: const TextStyle(
+                          fontFamily: 'Rubik',
+                          color: AppColors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                          letterSpacing: 1.5,
+                          shadows: [
+                            Shadow(
+                              color: Colors.black87,
+                              blurRadius: 6,
+                              offset: Offset(1, 2),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Row(
+                        children: [
+                          if (map.tacticalDescription.isNotEmpty)
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 3,
+                              ),
+                              decoration: BoxDecoration(
+                                color: AppColors.gradientStartColor.withAlpha(180),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                map.tacticalDescription,
+                                style: const TextStyle(
+                                  color: AppColors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 9,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                            ),
+                          if (map.coordinates != null &&
+                              map.coordinates!.isNotEmpty) ...[
+                            const SizedBox(width: 6),
+                            Expanded(
+                              child: Text(
+                                _formatCoordinates(map.coordinates),
+                                style: TextStyle(
+                                  color: AppColors.white.withAlpha(180),
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

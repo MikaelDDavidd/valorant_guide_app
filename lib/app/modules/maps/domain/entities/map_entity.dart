@@ -6,7 +6,11 @@ class MapEntity extends Equatable {
   final String narrativeDescription;
   final String tacticalDescription;
   final String? displayIcon;
+  final String? listViewIcon;
   final String splash;
+  final String? stylizedBackgroundImage;
+  final String? coordinates;
+  final List<CalloutEntity> callouts;
 
   const MapEntity({
     required this.uuid,
@@ -14,7 +18,11 @@ class MapEntity extends Equatable {
     required this.narrativeDescription,
     required this.tacticalDescription,
     this.displayIcon,
+    this.listViewIcon,
     required this.splash,
+    this.stylizedBackgroundImage,
+    this.coordinates,
+    this.callouts = const [],
   });
 
   @override
@@ -24,6 +32,26 @@ class MapEntity extends Equatable {
         narrativeDescription,
         tacticalDescription,
         displayIcon,
+        listViewIcon,
         splash,
+        stylizedBackgroundImage,
+        coordinates,
+        callouts,
+      ];
+}
+
+class CalloutEntity extends Equatable {
+  final String regionName;
+  final String superRegionName;
+
+  const CalloutEntity({
+    required this.regionName,
+    required this.superRegionName,
+  });
+
+  @override
+  List<Object?> get props => [
+        regionName,
+        superRegionName
       ];
 }

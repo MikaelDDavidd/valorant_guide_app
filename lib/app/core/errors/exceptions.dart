@@ -25,3 +25,22 @@ class NetworkException implements Exception {
   @override
   String toString() => 'NetworkException: $message';
 }
+
+class NotFoundException implements Exception {
+  final String message;
+
+  NotFoundException({required this.message});
+
+  @override
+  String toString() => 'NotFoundException: $message';
+}
+
+class RateLimitException implements Exception {
+  final String message;
+  final int? retryAfter;
+
+  RateLimitException({required this.message, this.retryAfter});
+
+  @override
+  String toString() => 'RateLimitException: $message';
+}

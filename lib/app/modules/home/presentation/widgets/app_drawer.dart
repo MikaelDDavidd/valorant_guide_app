@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:valorant_guide_app/app/constants/app_colors.dart';
+import 'package:valorant_guide_app/app/routes/app_pages.dart';
 
 class AppDrawer extends StatelessWidget {
   final int currentIndex;
@@ -42,6 +43,11 @@ class AppDrawer extends StatelessWidget {
                     title: 'Armas',
                     index: 2,
                   ),
+                  _buildDrawerItemNavigation(
+                    icon: Icons.person_search,
+                    title: 'Buscar Jogador',
+                    route: Routes.PLAYERS,
+                  ),
                   const SizedBox(height: 16),
                   _buildSectionTitle('EM BREVE'),
                   _buildDrawerItemDisabled(
@@ -55,10 +61,6 @@ class AppDrawer extends StatelessWidget {
                   _buildDrawerItemDisabled(
                     icon: Icons.style_outlined,
                     title: 'Player Cards',
-                  ),
-                  _buildDrawerItemDisabled(
-                    icon: Icons.search,
-                    title: 'Buscar Jogador',
                   ),
                 ],
               ),
@@ -159,6 +161,49 @@ class AppDrawer extends StatelessWidget {
         onTap: () {
           onItemTap(index);
           Get.back();
+        },
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildDrawerItemNavigation({
+    required IconData icon,
+    required String title,
+    required String route,
+  }) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: ListTile(
+        leading: Icon(
+          icon,
+          color: AppColors.white,
+          size: 24,
+        ),
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontFamily: 'Rubik',
+            color: AppColors.white,
+            fontWeight: FontWeight.w400,
+            fontSize: 16,
+          ),
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios,
+          color: AppColors.grey.withAlpha(100),
+          size: 16,
+        ),
+        onTap: () {
+          Get.back();
+          Get.toNamed(route);
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),

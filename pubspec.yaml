@@ -29,6 +29,7 @@ dependencies:
   another_flushbar: ^1.12.30
   fullscreen_image_viewer: ^0.0.6
   string_translate: ^1.4.5
+  video_player: ^2.8.2
 
 dev_dependencies: 
   flutter_lints: ^2.0.0
@@ -42,6 +43,7 @@ flutter:
   assets:
   - assets/icons/
   - assets/images/
+  - assets/logos/
 
   fonts:
   - family: ProductSans

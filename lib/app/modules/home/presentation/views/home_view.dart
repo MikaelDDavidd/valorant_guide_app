@@ -10,6 +10,7 @@ import 'package:valorant_guide_app/app/modules/home/presentation/widgets/app_dra
 import 'package:valorant_guide_app/app/modules/home/presentation/widgets/task_bar.dart';
 import 'package:valorant_guide_app/app/modules/maps/presentation/views/maps_view.dart';
 import 'package:valorant_guide_app/app/modules/weapons/presentation/views/weapons_view.dart';
+import 'package:valorant_guide_app/app/routes/app_pages.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -19,8 +20,7 @@ class HomeView extends GetView<HomeController> {
     final agentsController = Get.find<AgentsController>();
 
     return Obx(() => Scaffold(
-          backgroundColor: AppColors
-              .appColorsTheme[agentsController.homeThemeIndex.value].background,
+          backgroundColor: AppColors.appColorsTheme[agentsController.homeThemeIndex.value].background,
           appBar: AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -40,25 +40,6 @@ class HomeView extends GetView<HomeController> {
               width: 32,
               child: SvgPicture.asset('assets/icons/valorant_icon.svg'),
             ),
-            actions: [
-              IconButton(
-                icon: const Icon(
-                  Icons.search_rounded,
-                  color: AppColors.white,
-                  size: 28,
-                ),
-                onPressed: () {
-                  Get.snackbar(
-                    'Em breve',
-                    'Busca de jogadores será implementada!',
-                    backgroundColor: AppColors.selectedTabColor,
-                    colorText: AppColors.white,
-                    snackPosition: SnackPosition.BOTTOM,
-                    margin: const EdgeInsets.all(16),
-                  );
-                },
-              ),
-            ],
           ),
           drawer: AppDrawer(
             currentIndex: controller.currentTabIndex.value,
@@ -95,8 +76,7 @@ class HomeView extends GetView<HomeController> {
             textAlign: TextAlign.center,
             style: TextStyle(
               fontFamily: 'Rubik',
-              color: AppColors
-                  .appColorsTheme[agentsController.homeThemeIndex.value].text,
+              color: AppColors.appColorsTheme[agentsController.homeThemeIndex.value].text,
               fontWeight: FontWeight.w700,
               fontSize: 28,
             ),
@@ -175,7 +155,7 @@ class HomeView extends GetView<HomeController> {
                 ),
               ),
               const SizedBox(height: 8),
-              Text(
+              const Text(
                 'Digite o Riot ID do jogador (Nome#TAG)',
                 style: TextStyle(
                   fontFamily: 'Rubik',
@@ -196,7 +176,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                       decoration: InputDecoration(
                         hintText: 'Nome',
-                        hintStyle: TextStyle(color: AppColors.grey),
+                        hintStyle: const TextStyle(color: AppColors.grey),
                         filled: true,
                         fillColor: AppColors.darkPurple,
                         border: OutlineInputBorder(
@@ -231,7 +211,7 @@ class HomeView extends GetView<HomeController> {
                       ),
                       decoration: InputDecoration(
                         hintText: 'TAG',
-                        hintStyle: TextStyle(color: AppColors.grey),
+                        hintStyle: const TextStyle(color: AppColors.grey),
                         filled: true,
                         fillColor: AppColors.darkPurple,
                         border: OutlineInputBorder(
@@ -268,14 +248,12 @@ class HomeView extends GetView<HomeController> {
                     }
 
                     Navigator.pop(context);
-                    Get.snackbar(
-                      'Em breve',
-                      'Buscando $name#$tag... Feature em desenvolvimento!',
-                      backgroundColor: AppColors.selectedTabColor,
-                      colorText: AppColors.white,
-                      snackPosition: SnackPosition.BOTTOM,
-                      margin: const EdgeInsets.all(16),
-                      duration: const Duration(seconds: 3),
+                    Get.toNamed(
+                      Routes.PLAYER_DETAILS,
+                      arguments: {
+                        'name': name,
+                        'tag': tag
+                      },
                     );
                   },
                   style: ElevatedButton.styleFrom(
