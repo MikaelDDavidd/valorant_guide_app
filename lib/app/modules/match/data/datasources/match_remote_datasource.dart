@@ -26,8 +26,7 @@ class MatchRemoteDataSource implements IMatchRemoteDataSource {
 
   @override
   Future<MatchModel> getMatchDetails(String matchId) async {
-    final url =
-        '${ApiConstants.henrikBaseUrl}${ApiConstants.matchDetailEndpoint}/$matchId';
+    final url = '${ApiConstants.henrikBaseUrl}${ApiConstants.matchDetailEndpoint}/$matchId';
     dev.log('🔍 [MatchDataSource] GET Match Details: $url');
 
     try {
@@ -53,9 +52,17 @@ class MatchRemoteDataSource implements IMatchRemoteDataSource {
     String notFoundMessage,
   ) {
     final statusCode = response.statusCode;
+
+    if (response.body.isEmpty) {
+      throw ServerException(message: 'Empty response from server', statusCode: statusCode);
+    }
+
     final body = jsonDecode(response.body);
 
     if (statusCode == 200) {
+      if (body['data'] == null) {
+        throw ServerException(message: 'Data is null', statusCode: statusCode);
+      }
       return parser(body['data']);
     } else if (statusCode == 404) {
       throw NotFoundException(message: notFoundMessage);

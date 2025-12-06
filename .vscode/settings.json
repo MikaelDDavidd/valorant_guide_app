@@ -1,5 +1,9 @@
 {
     "cSpell.words": [
         "valorant"
-    ]
+    ],
+    "terminal.integrated.env.osx": {
+        "PATH": "/opt/homebrew/bin:${env:PATH}"
+    },
+    "dart.flutterSdkPath": "/Users/mikaeldavid/fvm/versions/stable"
 }

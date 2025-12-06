@@ -44,27 +44,39 @@ class _AgentDetailsViewState extends State<AgentDetailsView> {
 
   List<Color> _getAgentColors(AgentEntity agent) {
     if (agent.backgroundGradientColors.isEmpty) {
-      return [AppColors.gradientStartColor, AppColors.gradientEndColor];
+      return [
+        AppColors.gradientStartColor,
+        AppColors.gradientEndColor
+      ];
     }
-    return agent.backgroundGradientColors
-        .take(4)
-        .map((hex) => _hexToColor(hex))
-        .toList();
+    return agent.backgroundGradientColors.take(4).map((hex) => _hexToColor(hex)).toList();
   }
 
   List<Map<String, String>> _getGalleryImages(AgentEntity agent) {
     final images = <Map<String, String>>[];
     if (agent.fullPortrait != null) {
-      images.add({'url': agent.fullPortrait!, 'label': 'Retrato'});
+      images.add({
+        'url': agent.fullPortrait!,
+        'label': 'Retrato'
+      });
     }
     if (agent.fullPortraitV2 != null) {
-      images.add({'url': agent.fullPortraitV2!, 'label': 'Retrato V2'});
+      images.add({
+        'url': agent.fullPortraitV2!,
+        'label': 'Retrato V2'
+      });
     }
     if (agent.bustPortrait != null) {
-      images.add({'url': agent.bustPortrait!, 'label': 'Busto'});
+      images.add({
+        'url': agent.bustPortrait!,
+        'label': 'Busto'
+      });
     }
     if (agent.background != null) {
-      images.add({'url': agent.background!, 'label': 'Arte de Fundo'});
+      images.add({
+        'url': agent.background!,
+        'label': 'Arte de Fundo'
+      });
     }
     return images;
   }
@@ -75,8 +87,7 @@ class _AgentDetailsViewState extends State<AgentDetailsView> {
     final controller = Get.find<AgentsController>();
 
     return Obx(() => Scaffold(
-          backgroundColor:
-              AppColors.appColorsTheme[controller.homeThemeIndex.value].background,
+          backgroundColor: AppColors.appColorsTheme[controller.homeThemeIndex.value].background,
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -135,9 +146,7 @@ class _AgentDetailsViewState extends State<AgentDetailsView> {
                   end: Alignment.bottomCenter,
                   colors: [
                     Colors.transparent,
-                    AppColors.appColorsTheme[controller.homeThemeIndex.value]
-                        .background
-                        .withAlpha(255),
+                    AppColors.appColorsTheme[controller.homeThemeIndex.value].background.withAlpha(255),
                   ],
                 ),
               ),
@@ -205,8 +214,7 @@ class _AgentDetailsViewState extends State<AgentDetailsView> {
                                   width: 16,
                                   height: 16,
                                   color: AppColors.white,
-                                  errorWidget: (context, url, error) =>
-                                      const SizedBox(),
+                                  errorWidget: (context, url, error) => const SizedBox(),
                                 ),
                               ),
                             Text(
@@ -494,9 +502,7 @@ class _AgentDetailsViewState extends State<AgentDetailsView> {
                           width: _currentGalleryIndex == index ? 24 : 8,
                           height: 8,
                           decoration: BoxDecoration(
-                            color: _currentGalleryIndex == index
-                                ? agentColor
-                                : agentColor.withAlpha(50),
+                            color: _currentGalleryIndex == index ? agentColor : agentColor.withAlpha(50),
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
@@ -541,8 +547,7 @@ class _AgentDetailsViewState extends State<AgentDetailsView> {
     return sorted;
   }
 
-  Widget _buildSpecialAbilities(
-      AgentEntity agent, AgentsController controller) {
+  Widget _buildSpecialAbilities(AgentEntity agent, AgentsController controller) {
     final colors = _getAgentColors(agent);
     final agentColor = colors.first;
     final sortedAbilities = _sortAbilities(agent.abilities);
@@ -584,10 +589,7 @@ class _AgentDetailsViewState extends State<AgentDetailsView> {
     final colors = _getAgentColors(agent);
     final agentColor = colors.first;
 
-    final relatedAgents = controller.agents
-        .where((a) =>
-            a.role?.uuid == agent.role!.uuid && a.uuid != agent.uuid)
-        .toList();
+    final relatedAgents = controller.agents.where((a) => a.role?.uuid == agent.role!.uuid && a.uuid != agent.uuid).toList();
 
     if (relatedAgents.isEmpty) return const SizedBox();
 
@@ -636,9 +638,7 @@ class _AgentDetailsViewState extends State<AgentDetailsView> {
                         end: Alignment.bottomCenter,
                         colors: [
                           relatedColors.first.withAlpha(150),
-                          relatedColors.length > 1
-                              ? relatedColors[1].withAlpha(100)
-                              : relatedColors.first.withAlpha(80),
+                          relatedColors.length > 1 ? relatedColors[1].withAlpha(100) : relatedColors.first.withAlpha(80),
                         ],
                       ),
                       borderRadius: BorderRadius.circular(12),
@@ -658,8 +658,7 @@ class _AgentDetailsViewState extends State<AgentDetailsView> {
                                 child: CachedNetworkImage(
                                   imageUrl: relatedAgent.background!,
                                   fit: BoxFit.cover,
-                                  errorWidget: (context, url, error) =>
-                                      const SizedBox(),
+                                  errorWidget: (context, url, error) => const SizedBox(),
                                 ),
                               ),
                             ),
@@ -669,12 +668,9 @@ class _AgentDetailsViewState extends State<AgentDetailsView> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8),
                                   child: CachedNetworkImage(
-                                    imageUrl: relatedAgent.bustPortrait ??
-                                        relatedAgent.fullPortrait ??
-                                        '',
+                                    imageUrl: relatedAgent.bustPortrait ?? relatedAgent.fullPortrait ?? '',
                                     fit: BoxFit.contain,
-                                    errorWidget: (context, url, error) =>
-                                        const Icon(
+                                    errorWidget: (context, url, error) => const Icon(
                                       Icons.person,
                                       color: AppColors.white,
                                     ),
